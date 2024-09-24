@@ -1,46 +1,51 @@
 console.log("Page is loading");
 
-//Step 1. Make sure the page has loaded
-window.addEventListener('load', () => {
+//1. Make sure the page loads first
+window.addEventListener('load', function () {
   console.log("Page has loaded");
 
-  //Step 2. Send a request for data
+  //2. Request data
   fetch("http://api.open-notify.org/astros.json")
-    .then(response => { //Receive a response object that includes information about the data (status of the request)
-      return response.json(); //return json inside the response object
-    })
-    .then(data => { //Step 3. Access the data
-      //Step 4. Do something wth the data
-      let astronautsNo = data.number;
-      let astronauts = data.people;
+  .then(function(response){ //3. Then get the status of the request
+    // console.log(response);
+    return response.json()
+  })
+  .then(function(data){ //4. Then access the data
+    // console.log(data);
+    //5. Do something with the data
+    let astroNumber = data.number;
+    let astronauts = data.people;
+    // console.log(astroNumber)
+    // console.log(astronauts)
 
-      //Step 4.1 Show the number on the page
-      //Create a p element to show the number
-      let numberPar = document.createElement("p");
-      numberPar.innerHTML = astronautsNo;
+    //Add the number to the page
+    let numberPar = document.createElement('p');
+    numberPar.innerHTML = astroNumber;
 
-      //Access section container and append to it
-      let container = document.getElementById('data_container');
-      container.appendChild(numberPar);
+    //Append number par to html
+    let containerSection = document.querySelector('section');
+    containerSection.appendChild(numberPar);
 
-      //add styling
-      numberPar.setAttribute('class', 'astronaut_number');
+    //Add styling to the number
+    numberPar.setAttribute('class', 'astronaut_number');
 
-      //Step 4.2 Show the names on the page
-      astronauts.forEach(element => {
-        console.log(element);
+    //Add the astronaut names
+    for(let i=0; i<astronauts.length; i++){
+      console.log(astronauts[i]);
+      let astronaut = astronauts[i].name;
 
-        let astronaut = element.name;
-        //for every astronaut create a span element
-        let astroSpan = document.createElement("span");
-        astroSpan.innerHTML = astronaut;
-        //attach to the section container
-        container.appendChild(astroSpan);
-        //add styling
-        astroSpan.setAttribute('class', 'astronaut_name');
-      })
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      //create a new span element for each astronaut
+      let astroSpan = document.createElement('span');
+      astroSpan.innerHTML = astronaut;
+
+      //attach to the same container
+      containerSection.appendChild(astroSpan);
+
+      astroSpan.setAttribute('class', 'astronaut_name');
+    }
+  })
+  .catch(function(error){
+    console.log(error);
+  });
 });
+

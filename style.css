@@ -7,6 +7,7 @@ body{
 
 h1{
   text-align: center;
+  margin: 10%;
 }
 
 .container{
@@ -16,10 +17,11 @@ h1{
 }
 
 .astronaut_number{
-  color:cadetblue;
-  font-size: 100px;
+  color:darkblue;
+  font-size: 10vh;
 }
 
-.astronaut_name{
-  margin: 1vh;
+.astronaut_name {
+  color: chocolate;
+  font-size: 8vh;
 }
